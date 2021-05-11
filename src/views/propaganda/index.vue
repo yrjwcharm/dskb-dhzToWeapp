@@ -8,26 +8,35 @@
         <div class="div_wenmei" @click="See('http://wmjb.youjiankang.top:8087/szgmjk/schoolinfection/report')">
           <img src="@/assets/蚊媒举报.png" class="img2">
         </div>
-        <div class="div_xiaoyou">
-        <wx-open-launch-weapp
-          id="launch-btn"
-          username="gh_0d92e1f8211b"
-          path="pages/index/index.html"
-          @error="handleErrorFn"
-          @launch="handleLaunchFn"
-        >
-          <script type="text/wxtag-template">
-            <style>
-              /*.img3 {*/
-              /*  height: 124.5px;*/
-              /*  width: 253.5px;*/
-              /*}*/
+          <wx-open-launch-weapp
+            id="launch-btn"
+            username="gh_0d92e1f8211b"
+            path="pages/index/index.html"
+            @error="handleErrorFn"
+            @launch="handleLaunchFn"
+          >
+            <script type="text/wxtag-template">
+              <style>
+                .div_xiaoyou {
+                  /*width: 100%;*/
+                  margin-top: 33.5px;
+                  margin-left: 40px;
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: flex-end !important;
+                }
 
-            </style>
-            <image :src="imgBase64" class="img3"/>
-          </script>
-        </wx-open-launch-weapp>
-        </div>
+                .img3 {
+                  height: 124.5px;
+                  width: 253.5px;
+                }
+
+              </style>
+              <view class="div_xiaoyou">
+                <image src="{{imgBase64}}" class="img3"/>
+              </view>
+            </script>
+          </wx-open-launch-weapp>
         <div class="div_kongbai">
           <img src="@/assets/空白.png" class="img3">
         </div>
@@ -38,6 +47,7 @@
 <script>
 import wx from 'weixin-js-sdk';
 import {imgBase64} from '../../utils/base64'
+
 const {getWxConfig} = require("../../service/SyncRequest");
 export default {
   name: "index",
@@ -47,10 +57,10 @@ export default {
       imgBase64
     }
   },
- async mounted() {
+  async mounted() {
     let url = window.location.href.split('#')[0];
     const res = await getWxConfig(url);
-    console.log(333,res);
+    console.log(333, res);
     wx.config({
       debug: false, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
       appId: res.appId, // 必填，公众号的唯一标识
@@ -94,14 +104,7 @@ export default {
   position: relative;
   height: calc(100vh - 20px)
 }
-.div_xiaoyou {
-  width: 100%;
-  margin-top: 33.5px;
-  display: flex;
- flex-direction: column;
- align-items: flex-end !important;
 
-}
 .div_youqing {
   width: 325px;
   height: calc(100vh - 80px);
@@ -127,6 +130,7 @@ export default {
 .div_wenmei {
   margin-top: 22px;
 }
+
 .div_kongbai {
   margin-top: 34px;
 }
@@ -134,6 +138,11 @@ export default {
 .img1 {
   height: 40px;
   width: 241px;
+}
+
+.img3 {
+  height: 124.5px;
+  width: 253.5px;
 }
 
 .img2 {
